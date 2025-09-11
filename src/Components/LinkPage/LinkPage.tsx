@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LinkPage-Style.css';
 import linkIcon from '../../assets/PICT.png';
-
+import { loadLinks, saveLinks } from '../../utils/localStorage';
+// Define Link interface locally to avoid import issues
 interface Link {
   id: string;
   name: string;
@@ -12,20 +13,37 @@ interface Link {
 
 const LinkPage: React.FC = () => {
   const navigate = useNavigate();
-  const [links, setLinks] = useState<Link[]>([
-    { id: '1', name: 'Google', url: 'https://www.google.com', favorite: false },
-    { id: '2', name: 'React Docs', url: 'https://react.dev', favorite: true },
-    { id: '3', name: 'GitHub', url: 'https://github.com', favorite: false },
-  ]);
+  const [links, setLinks] = useState<Link[]>([]);
+  
+  // Load links from local storage on component mount
+  useEffect(() => {
+    const savedLinks = loadLinks();
+    if (savedLinks.length === 0) {
+      // Set default links if no saved links exist
+      const defaultLinks = [
+        { id: '1', name: 'Google', url: 'https://www.google.com', favorite: false },
+        { id: '2', name: 'React Docs', url: 'https://react.dev', favorite: true },
+        { id: '3', name: 'GitHub', url: 'https://github.com', favorite: false },
+      ];
+      setLinks(defaultLinks);
+      saveLinks(defaultLinks);
+    } else {
+      setLinks(savedLinks);
+    }
+  }, []);
 
   const toggleFavorite = (id: string) => {
-    setLinks(links.map(link =>
+    const updatedLinks = links.map(link =>
       link.id === id ? { ...link, favorite: !link.favorite } : link
-    ));
+    );
+    setLinks(updatedLinks);
+    saveLinks(updatedLinks);
   };
 
   const deleteLink = (id: string) => {
-    setLinks(links.filter(link => link.id !== id));
+    const updatedLinks = links.filter(link => link.id !== id);
+    setLinks(updatedLinks);
+    saveLinks(updatedLinks);
   };
 
   return (

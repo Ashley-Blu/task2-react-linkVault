@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddLinkPage-Style.css';
 import linkIcon from '../../assets/PICT.png';
+import { addLink } from '../../utils/localStorage';
+// Define NewLink type locally to avoid import issues
+type NewLink = {
+  name: string;
+  url: string;
+  favorite: boolean;
+};
 
 const AddLinkPage: React.FC = () => {
   const navigate = useNavigate();
@@ -10,7 +17,12 @@ const AddLinkPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('New Link Data:', { linkName, linkUrl });
+    // Add the new link to local storage
+    addLink({
+      name: linkName,
+      url: linkUrl,
+      favorite: false
+    });
     alert(`Link "${linkName}" added!`);
     navigate('/linkpage');
   };

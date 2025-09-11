@@ -8,8 +8,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh; /* Use fixed height instead of min-height */
   background-color: #f0f2f5; /* Light grey background */
+  overflow: hidden; /* Prevent scrolling */
 }
 
 code {

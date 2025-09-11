@@ -1,19 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp-Style.css';
 import linkIcon from '../../assets/PICT.png';
+import { registerUser } from '../../utils/auth';
 
 const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [error, setError] = useState('');
+  
+  // Check password match in real-time
+  useEffect(() => {
+    if (confirmPassword) {
+      setPasswordMatch(password === confirmPassword);
+    } else {
+      setPasswordMatch(true); // Reset when confirm password is empty
+    }
+  }, [password, confirmPassword]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sign Up Data:', { email, password, confirmPassword });
-    // Simulate signup
-    navigate('/linkpage');
+    setError('');
+    
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
+    try {
+      registerUser(email, password);
+      // Registration successful
+      navigate('/linkpage');
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An error occurred during registration');
+      }
+    }
   };
 
   return (
@@ -49,9 +77,14 @@ const SignUpPage: React.FC = () => {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              className={!passwordMatch && confirmPassword ? 'password-mismatch' : ''}
               required
             />
+            {!passwordMatch && confirmPassword && (
+              <p className="password-feedback">Passwords do not match</p>
+            )}
           </div>
+          {error && <p className="signup-error">{error}</p>}
           <button type="submit" className="signup-button">Sign Up</button>
         </form>
         <p className="signup-footer">

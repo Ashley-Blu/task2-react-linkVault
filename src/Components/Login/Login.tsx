@@ -2,17 +2,26 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login-Style.css';
 import linkIcon from '../../assets/PICT.png';
+import { verifyCredentials } from '../../utils/auth';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [error, setError] = useState('');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login Data:', { email, password });
-    // Simulate login
-    navigate('/linkpage');
+    setError('');
+    
+    if (verifyCredentials(email, password)) {
+      // Login successful
+      navigate('/linkpage');
+    } else {
+      // Login failed
+      setError('Invalid email or password');
+    }
   };
 
   return (
@@ -44,6 +53,7 @@ const LoginPage: React.FC = () => {
           <p className="login-forgot-password" onClick={() => console.log('Forgot Password clicked')}>
             Forgot Password?
           </p>
+          {error && <p className="login-error">{error}</p>}
           <button type="submit" className="login-button">Log In</button>
         </form>
         <p className="login-footer">
