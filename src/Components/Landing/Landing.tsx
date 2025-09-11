@@ -24,13 +24,7 @@ const LandingPage: React.FC = () => {
 
         {/* Left Section */}
         <div className="split right">
-          <h1>Create an account</h1>
-          <p>
-            Already have an account?{" "}
-            <span className="login-link" onClick={() => navigate("/login")}>
-              Login
-            </span>
-          </p>
+          <h1>Links In</h1>
 
           <div className="landing-content">
             <p className="landing-description">
