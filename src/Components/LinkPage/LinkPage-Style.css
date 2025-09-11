@@ -1,0 +1,146 @@
+.linkpage-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 500px; /* Wider for link list */
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.linkpage-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  position: relative; /* For positioning logout button */
+}
+
+.linkpage-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.linkpage-title {
+  font-size: 28px;
+  color: #333;
+  margin: 0;
+}
+
+.linkpage-add-button {
+  background-color: #6a0dad;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: auto; /* Pushes to the right */
+  transition: background-color 0.3s ease;
+}
+
+.linkpage-add-button:hover {
+  background-color: #5a099a;
+}
+
+.linkpage-logout-button {
+  background-color: #dc3545; /* Red for logout */
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.linkpage-logout-button:hover {
+  background-color: #c82333;
+}
+
+.linkpage-content {
+  flex-grow: 1;
+}
+
+.linkpage-no-links {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-top: 30px;
+}
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.link-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.link-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.link-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.link-url {
+  font-size: 14px;
+  color: #6a0dad;
+  text-decoration: none;
+}
+
+.link-url:hover {
+  text-decoration: underline;
+}
+
+.link-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.link-action-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.link-action-button:hover {
+  background-color: #eee;
+}
+
+.favorite-button {
+  color: #ccc; /* Default star color */
+}
+
+.favorite-button.favorited {
+  color: #ffd700; /* Gold for favorited star */
+}
+
+.delete-button {
+  color: #dc3545;
+}
