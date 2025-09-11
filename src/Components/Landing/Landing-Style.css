@@ -1,61 +1,177 @@
-.landing-container {
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f6f7fb;
+  height: 100vh; /* full viewport height */
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  align-items: center; /* centers card vertically */
+  overflow: hidden; /* prevent vertical scroll */
 }
 
+/* Landing content Card */
 .landing-card {
-  background-color: white;
-  padding: 40px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 350px; /* Adjust width as needed */
-  max-width: 90%;
+  display: flex;
+  width: 150vh;           /* responsive width */
+  max-width: 1400px;    /* wide but controlled */
+  height: 80vh;         /* fit within screen, not too tall */
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
-.landing-icon {
-  width: 80px;
-  height: 80px;
+/* Left Section (Brand + Welcome) */
+.split.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+  position: relative;
+}
+
+.brand {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #7b1fa2;
+}
+
+.brand span {
+  color: #7b1fa2; /* makes the L pop */
+  font-size: 20px;
+}
+
+.landing-picture {
+  width: 150px;
   margin-bottom: 20px;
 }
 
-.landing-title {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
+.split.left h4 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
-.landing-subtitle {
-  font-size: 16px;
+.split.left p {
+  font-size: 15px;
   color: #666;
+}
+
+/* Right Section (Form) */
+.split.right {
+  flex: 1.3;
+  padding: 50px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split.right h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.split.right p {
+  font-size: 15px;
   margin-bottom: 30px;
 }
 
-.landing-button {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #6a0dad; /* Purple */
-  color: white;
-  font-size: 16px;
+.login-link {
+  color: #6c63ff;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.landing-button:hover {
-  background-color: #5a099a;
+.login-link:hover {
+  text-decoration: underline;
 }
 
-.landing-button-secondary {
-  background-color: #e0e0e0; /* Light grey */
+/* Inputs */
+.name-input,
+.email-input,
+.password-input {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 15px;
+  font-weight: 500;
   color: #333;
 }
 
-.landing-button-secondary:hover {
-  background-color: #d0d0d0;
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #e8d9ec;
+  font-size: 15px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #777;
+  opacity: 30%;
+}
+
+/* Button */
+.button {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button button {
+  width: 50%;
+  padding: 14px;
+  background: #9c27b0;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.button button:hover {
+  background: #7b1fa2;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  body {
+    overflow: auto; /* allow scroll on mobile */
+  }
+
+  .landing-card {
+    flex-direction: column;
+    width: 100%;
+    height: auto; /* allow height to grow naturally */
+    margin: 20px 0;
+  }
+
+  .split.left {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+  }
+
+  .split.rigt {
+    padding: 20px;
+  }
+
+  .brand {
+    position: static;
+    margin-bottom: 15px;
+  }
 }
