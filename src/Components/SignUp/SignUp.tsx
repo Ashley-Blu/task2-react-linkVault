@@ -1,18 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './SignUp-Style.css';
-import linkIcon from '../../assets/PICT.png';
-import { registerUser } from '../../utils/auth';
+/**
+ * Sign Up Page Component
+ *
+ * User registration page with email and password validation.
+ * Features real-time password confirmation validation and error handling.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered sign up form
+ *
+ * @example
+ * return (
+ *   <SignUpPage />
+ * );
+ */
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./SignUp-Style.css";
+import linkIcon from "../../assets/PICT.png";
+import { registerUser, validateSignup } from "../../utils/auth";
 
+/**
+ * Displays the sign up form with email, password, and password confirmation fields
+ *
+ * @function
+ * @name SignUpPage
+ * @returns {JSX.Element} Sign up form UI with input validation feedback
+ */
 const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const [error, setError] = useState('');
-  
-  // Check password match in real-time
+  const [error, setError] = useState("");
+
+  /**
+   * Effect hook to validate password confirmation in real-time
+   * Updates passwordMatch state whenever either password field changes
+   */
   useEffect(() => {
     if (confirmPassword) {
       setPasswordMatch(password === confirmPassword);
@@ -21,26 +45,32 @@ const SignUpPage: React.FC = () => {
     }
   }, [password, confirmPassword]);
 
+  /**
+   * Handles sign up form submission
+   * Validates all inputs and registers user with error handling
+   *
+   * @function handleSubmit
+   * @param {React.FormEvent} e - Form submission event
+   * @returns {void}
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    
-    // Validate passwords match
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+    setError("");
+
+    // Validate all inputs
+    const validationResult = validateSignup(email, password, confirmPassword);
+    if (!validationResult.valid) {
+      setError(validationResult.error);
       return;
     }
-    
-    try {
-      registerUser(email, password);
+
+    const result = registerUser(email, password);
+    if (result.success) {
       // Registration successful
-      navigate('/linkpage');
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An error occurred during registration');
-      }
+      navigate("/linkpage");
+    } else {
+      // Show specific error message
+      setError(result.error);
     }
   };
 
@@ -77,7 +107,9 @@ const SignUpPage: React.FC = () => {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={!passwordMatch && confirmPassword ? 'password-mismatch' : ''}
+              className={
+                !passwordMatch && confirmPassword ? "password-mismatch" : ""
+              }
               required
             />
             {!passwordMatch && confirmPassword && (
@@ -85,11 +117,13 @@ const SignUpPage: React.FC = () => {
             )}
           </div>
           {error && <p className="signup-error">{error}</p>}
-          <button type="submit" className="signup-button">Sign Up</button>
+          <button type="submit" className="signup-button">
+            Sign Up
+          </button>
         </form>
         <p className="signup-footer">
           Already have an account?{" "}
-          <span className="signup-link-text" onClick={() => navigate('/login')}>
+          <span className="signup-link-text" onClick={() => navigate("/login")}>
             Login
           </span>
         </p>

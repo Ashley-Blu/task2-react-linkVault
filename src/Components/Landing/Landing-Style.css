@@ -12,9 +12,9 @@ body {
 /* Landing content Card */
 .landing-card {
   display: flex;
-  width: 150vh;           /* responsive width */
-  max-width: 1400px;    /* wide but controlled */
-  height: 80vh;         /* fit within screen, not too tall */
+  width: 150vh; /* responsive width */
+  max-width: 1400px; /* wide but controlled */
+  height: 80vh; /* fit within screen, not too tall */
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
@@ -161,20 +161,62 @@ input::placeholder {
   background-color: #0056b3;
 }
 
-/* Media Queries */
-@media (max-width: 1024px) {
+/* Media Queries - Mobile First Approach */
+
+/* Desktop - Large (1025px and above) */
+@media (min-width: 1025px) {
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
   .landing-card {
-    width: 90%;
-    max-width: 900px;
+    width: 150vh;
+    max-width: 1400px;
+    height: 80vh;
   }
 }
 
-@media (max-width: 768px) {
+/* Tablet/Medium (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .landing-card {
+    width: 90%;
+    max-width: 900px;
+    height: 85vh;
+  }
+
+  .split.right {
+    padding: 40px 50px;
+  }
+
+  .split.right h1 {
+    font-size: 28px;
+  }
+
+  .landing-description {
+    font-size: 16px;
+  }
+
+  .get-started-button {
+    width: 180px;
+    padding: 14px;
+  }
+}
+
+/* Tablet/Small to Mobile Large (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  body {
+    height: auto;
+    overflow: auto;
+    padding: 20px 0;
+  }
+
   .landing-card {
     flex-direction: column;
     height: auto;
     width: 95%;
     max-width: 600px;
+    margin: 20px auto;
   }
 
   .split {
@@ -182,64 +224,181 @@ input::placeholder {
     height: auto;
   }
 
-  .left {
+  .split.left {
     padding: 30px 20px;
     border-radius: 10px 10px 0 0;
   }
 
-  .right {
+  .split.right {
     padding: 30px 20px;
     border-radius: 0 0 10px 10px;
   }
-  
+
+  .brand {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 18px;
+  }
+
+  .landing-picture {
+    width: 120px;
+    margin-bottom: 15px;
+  }
+
+  .split.left h4 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .split.left p {
+    font-size: 14px;
+  }
+
+  .split.right h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
   .landing-description {
     font-size: 16px;
     padding: 0 10px;
+    margin-bottom: 25px;
+  }
+
+  .get-started-button {
+    width: 85%;
+    max-width: 250px;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile Small (375px - 480px) */
+@media (max-width: 480px) and (min-width: 375px) {
   body {
-    overflow: auto; /* allow scroll on mobile */
+    height: auto;
+    overflow: auto;
+    padding: 10px 0;
   }
 
   .landing-card {
     width: 100%;
     border-radius: 0;
     box-shadow: none;
-    margin: 20px 0;
+    margin: 15px 0;
+    flex-direction: column;
+    height: auto;
   }
-  
-  .left, .right {
+
+  .left,
+  .right {
     border-radius: 0;
     padding: 20px 15px;
   }
-  
+
   .split.left {
     border-bottom: 1px solid #eee;
+    padding: 25px 15px;
   }
 
   .split.right {
-    padding: 20px;
+    padding: 20px 15px;
   }
-  
+
   .landing-picture {
     width: 80px;
     height: 80px;
+    margin-bottom: 15px;
   }
-  
+
+  .split.left h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .split.left p {
+    font-size: 13px;
+  }
+
+  .split.right h1 {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .landing-description {
+    font-size: 14px;
+    padding: 0;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
   .get-started-button {
     width: 90%;
     max-width: 250px;
+    padding: 12px;
+    font-size: 16px;
   }
-  
-  .login-link {
-    display: inline-block;
-    margin-top: 5px;
-  }
-  
+
   .brand {
     position: static;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+}
+
+/* Mobile Extra Small (below 375px) */
+@media (max-width: 374px) {
+  body {
+    height: auto;
+    overflow: auto;
+    padding: 0;
+  }
+
+  .landing-card {
+    padding: 0;
+    margin: 10px 0;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .split.left {
+    padding: 20px 12px;
+  }
+
+  .split.right {
+    padding: 15px 12px;
+  }
+
+  .split.left h4 {
+    font-size: 16px;
+  }
+
+  .split.left p {
+    font-size: 12px;
+  }
+
+  .landing-picture {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .split.right h1 {
+    font-size: 20px;
     margin-bottom: 15px;
+  }
+
+  .landing-description {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  .get-started-button {
+    width: 100%;
+    padding: 11px;
+    font-size: 15px;
+  }
+
+  .brand {
+    font-size: 16px;
   }
 }

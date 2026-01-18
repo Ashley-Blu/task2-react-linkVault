@@ -4,12 +4,6 @@ import './AddLinkPage-Style.css';
 import linkIcon from '../../assets/PICT.png';
 import { addLink } from '../../utils/localStorage';
 // Define NewLink type locally to avoid import issues
-type NewLink = {
-  name: string;
-  url: string;
-  favorite: boolean;
-};
-
 const AddLinkPage: React.FC = () => {
   const navigate = useNavigate();
   const [linkName, setLinkName] = useState('');
